@@ -264,10 +264,13 @@ class Compiler(object):
     def visitBlockComment(self, comment):
         if not comment.buffer:
             return
-        isConditional = comment.val.strip().startswith('if')
-        self.buffer('<!--[%s]>' % comment.val.strip() if isConditional else '<!--%s' % comment.val)
+        self.buffer('\n<!--%s' % comment.val)
+        if self.pp:
+            self.buffer('\n' + '  ' * (self.indents))
         self.visit(comment.block)
-        self.buffer('<![endif]-->' if isConditional else '-->')
+        # if self.pp:
+            # self.buffer('\n' + '  ' * (self.indents))
+        self.buffer('-->')
 
     def visitConditional(self, conditional):
         TYPE_CODE = {

@@ -126,6 +126,7 @@ def run_case(case,process):
         html_src = html_src.decode('utf-8')
     html_file.close()
     try:
+        print('>>>>> case: %s' % case)
         processed_jade = processor(jade_src, '%s.jade'%case).strip('\n')
         print('PROCESSED\n',processed_jade,len(processed_jade))
         print('EXPECTED\n',html_src,len(html_src))
@@ -141,7 +142,7 @@ exclusions = {
     'Jinja2': set(['layout']),
     'Jinja2-variable_start_string': set(['layout']),
     'Django': set(['layout'])}
-    
+
 
 @with_setup(setup_func, teardown_func)
 def test_case_generator():

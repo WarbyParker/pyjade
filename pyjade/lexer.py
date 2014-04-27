@@ -22,7 +22,7 @@ def regexec(regex, input):
 
 class Lexer(object):
     RE_INPUT = re.compile(r'\r\n|\r')
-    RE_COMMENT = re.compile(r'^ *\/\/(-)?([^\n]*)')
+    RE_COMMENT = re.compile(r'^\/\/(-)?([^\n]*)')
     RE_TAG = re.compile(r'^(\w[-:\w]*)')
     RE_FILTER = re.compile(r'^:(\w+)')
     RE_DOCTYPE = re.compile(r'^(?:!!!|doctype) *([^\n]+)?')
@@ -270,7 +270,7 @@ class Lexer(object):
             tok = self.tok('code', name)
             tok.escape = flags.startswith('=')
             #print captures
-            tok.buffer = '=' in flags 
+            tok.buffer = '=' in flags
             # print tok.buffer
             return tok
 

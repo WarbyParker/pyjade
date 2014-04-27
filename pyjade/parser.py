@@ -126,9 +126,11 @@ class Parser(object):
         tok = self.expect('comment')
 
         if 'indent'==self.peek().type:
-            node = nodes.BlockComment(tok.val, self.block(), tok.buffer)
+            self.lexer.pipeless = True
+            node = nodes.BlockComment(tok.val, self.parseTextBlock(), tok.buffer)
+            self.lexer.pipeless = False
         else:
-            node = nodes.Comment(tok.val,tok.buffer)
+            node = nodes.Comment(tok.val, tok.buffer)
 
         node.line = self.line()
         return node

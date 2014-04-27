@@ -5,6 +5,7 @@ class Node(object):
 	debug = False
 	def __str__(self):
 		return self.__dict__.__str__()
+
 class BlockComment(Node):
 	def __init__(self,val,block,buffer):
 		self.block = block
@@ -40,11 +41,11 @@ class Code(Node):
 		self.block=None
 		self.buffer = buffer
 		self.escape = escape
+
 class Comment(Node):
 	def __init__(self,val,buffer):
 		self.val = val
 		self.buffer = buffer
-
 
 class Doctype(Node):
 	def __init__(self,val):
